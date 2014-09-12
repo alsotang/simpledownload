@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/alsotang/simpledownload.svg?branch=master)](https://travis-ci.org/alsotang/simpledownload)
+[![Build Status](https://travis-ci.org/alsotang/simpledownload.svg?branch=master)](https://travis-ci.org/alsotang/simpledownload) [![Coverage Status](https://coveralls.io/repos/alsotang/simpledownload/badge.png?branch=master)](https://coveralls.io/r/alsotang/simpledownload?branch=master)
 
 install
 ==
