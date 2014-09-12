@@ -1,4 +1,7 @@
 test:
-	./node_modules/.bin/mocha --timeout 5000
+	./node_modules/.bin/mocha --timeout 10000
 
-.PHONY: test
+test-cov:
+	./node_modules/.bin/istanbul cover _mocha
+
+.PHONY: test test-cov

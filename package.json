@@ -20,9 +20,13 @@
   },
   "homepage": "https://github.com/alsotang/simpledownload",
   "devDependencies": {
-    "mm": "^0.2.1",
+    "istanbul": "^0.3.2",
     "mocha": "^1.21.4",
-    "should": "^4.0.4",
-    "superagent": "^0.18.2"
+    "nock": "^0.47.0",
+    "should": "^4.0.4"
+  },
+  "dependencies": {
+    "superagent": "^0.18.2",
+    "superagentparse": "^0.3.0"
   }
 }

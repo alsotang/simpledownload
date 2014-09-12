@@ -1,2 +1,4 @@
 node_modules
 test/download
+.DS_Store
+coverage
