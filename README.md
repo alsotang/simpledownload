@@ -1,6 +1,3 @@
-simpledownload
-=
-
 install
 ==
 
@@ -23,6 +20,7 @@ download(url, filename, [options], callback)
 * `url` - the url you wanna download. e.g `http://fxck.it/1.jpg`
 * `filename` - e.g `__dirname + '/1.jpg'`
 * `options.timeout` - use millisecond
+* `callback` - `function(err)`
 
 license
 ==
