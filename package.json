@@ -18,5 +18,11 @@
   "bugs": {
     "url": "https://github.com/alsotang/simpledownload/issues"
   },
-  "homepage": "https://github.com/alsotang/simpledownload"
+  "homepage": "https://github.com/alsotang/simpledownload",
+  "devDependencies": {
+    "mm": "^0.2.1",
+    "mocha": "^1.21.4",
+    "should": "^4.0.4",
+    "superagent": "^0.18.2"
+  }
 }
