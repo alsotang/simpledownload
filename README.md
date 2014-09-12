@@ -21,7 +21,7 @@ download(url, filename, [options], callback)
 
 * `url` - the url you wanna download. e.g `http://fxck.it/1.jpg`
 * `filename` - e.g `__dirname + '/1.jpg'`
-* `options.timeout` - use millisecond
+* `options.timeout` - use millisecond. If timeout, `err.timeout` would exist.
 * `callback` - `function(err)`
 
 license
