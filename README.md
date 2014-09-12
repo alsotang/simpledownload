@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/alsotang/simpledownload.svg?branch=master)](https://travis-ci.org/alsotang/simpledownload)
+
 install
 ==
 
