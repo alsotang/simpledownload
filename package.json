@@ -1,0 +1,22 @@
+{
+  "name": "simpledownload",
+  "version": "1.0.0",
+  "description": "provide `url` and `filename`, then download file",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:alsotang/simpledownload.git"
+  },
+  "keywords": [
+    "download"
+  ],
+  "author": "alsotang <alsotang@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alsotang/simpledownload/issues"
+  },
+  "homepage": "https://github.com/alsotang/simpledownload"
+}
