@@ -8,7 +8,7 @@ var download = function(url, filename, options, callback) {
     options = {};
   }
 
-  var timeout = options.timeout;
+  var timeout = options.timeout || 30 * 1000;
   superagent
     .get(url)
     .parse(superagentparse('buffer'))
