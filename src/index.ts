@@ -9,30 +9,20 @@ export interface SimpledownloadOptions {
 async function simpledownload(url: string, localPath: string, options?: SimpledownloadOptions): Promise<void> {
   const urlObj = new URL(url);
   const httpClient = urlObj.protocol === 'https:' ? https : http;
+  const file = fs.createWriteStream(localPath)
+  const request = httpClient.get(url, (response) => {
+    response.pipe(file)
+  })
 
-  return new Promise((resolve, reject) => {
-
-    // if error, release all resources
-    function releaseWhenError() {
-      request.destroy()
-      file.close()
-      delWhenExist(localPath)
-    }
-    const file = fs.createWriteStream(localPath)
+  return new Promise<void>((resolve, reject) => {
     file.on('finish', () => {
       resolve()
     })
     file.on('error', (err) => {
-      releaseWhenError()
       reject(err);
     })
 
-    const request = httpClient.get(url, (response) => {
-      response.pipe(file)
-
-    })
     request.on('error', (err) => {
-      releaseWhenError()
       reject(err)
     })
 
@@ -40,10 +30,16 @@ async function simpledownload(url: string, localPath: string, options?: Simpledo
     if (options?.timeout) {
       const timeout = options.timeout
       setTimeout(() => {
-        releaseWhenError()
         reject(new TimeoutError(timeout))
       }, timeout);
     }
+  })
+  .catch((err) => {
+    // if error, release all resources
+    request?.destroy()
+    file.close()
+    delWhenExist(localPath)
+    throw err;
   })
 }
 

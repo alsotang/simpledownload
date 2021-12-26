@@ -15,11 +15,12 @@ test('should download a svg', async () => {
 test('should handle timeout', async () => {
   const localPath = '/tmp/test2.png'
   const timeout = 5; // 5ms
-  expect(simpledownload(imageUrl, localPath, {timeout})).rejects.toThrow(TimeoutError);
+  await expect(simpledownload(imageUrl, localPath, {timeout})).rejects.toThrow(TimeoutError);
+  await expect(fs.promises.stat(localPath)).rejects.toThrow('ENOENT');
 });
 
 test('should throw when localPath does not exist', async () => {
   const localPath = '/tmp/not/exist/test3.png'
 
-  expect(simpledownload(imageUrl, localPath)).rejects.toThrow('ENOENT');
+  await expect(simpledownload(imageUrl, localPath)).rejects.toThrow('ENOENT');
 });
