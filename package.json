@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "npm run build && jest"
+    "test": "npm run build && jest",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
