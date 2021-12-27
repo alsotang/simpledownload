@@ -1,3 +1,5 @@
+[![Node.js CI](https://github.com/alsotang/simpledownload/actions/workflows/node.js.yml/badge.svg)](https://github.com/alsotang/simpledownload/actions/workflows/node.js.yml)
+
 ## Install
 
 `npm install simpledownload`
