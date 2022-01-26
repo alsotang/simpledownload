@@ -4,13 +4,17 @@ import https from 'https'
 import { TimeoutError } from './errors'
 export interface SimpledownloadOptions {
   timeout?: number;
+  agent?: http.Agent;
 }
 
-async function simpledownload(url: string, localPath: string, options?: SimpledownloadOptions): Promise<void> {
+async function simpledownload(url: string, localPath: string, options: SimpledownloadOptions = {}): Promise<void> {
   const urlObj = new URL(url);
-  const httpClient = urlObj.protocol === 'https:' ? https : http;
+
+  const httpAgent = options.agent;
+  const httpLib = urlObj.protocol === 'https:' ? https : http;
+
   const file = fs.createWriteStream(localPath)
-  const request = httpClient.get(url, (response) => {
+  const request = httpLib.get(url, {agent: httpAgent}, (response) => {
     response.pipe(file)
   })
 
