@@ -7,7 +7,7 @@
 ## Usage
 
 ```js
-import simpledownload from 'simpledownload'
+import {simpledownload} from 'simpledownload'
 await simpledownload('https://www.google.co.jp/images/srpr/logo11w.png', `${__dirname}/1.jpg`);
 ```
 

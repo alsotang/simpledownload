@@ -1,4 +1,4 @@
-import simpledownload, {TimeoutError} from '..'
+import {simpledownload, TimeoutError} from '..'
 import fs from 'fs'
 import https from 'https'
 

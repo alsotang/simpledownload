@@ -57,5 +57,4 @@ async function delWhenExist(path: string) {
 }
 
 export { simpledownload }
-export default simpledownload
 export * from './errors'
