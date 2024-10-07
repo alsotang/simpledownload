@@ -1,6 +1,6 @@
 {
   "name": "simpledownload",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "call with `url` and `filename`, then download the file",
   "main": "dist/index.js",
   "scripts": {

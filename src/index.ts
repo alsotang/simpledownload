@@ -7,18 +7,38 @@ export interface SimpledownloadOptions {
   agent?: http.Agent;
 }
 
-async function simpledownload(url: string, localPath: string, options: SimpledownloadOptions = {}): Promise<void> {
+/**
+ * httpGet - This function handles HTTP GET requests and follows redirects if encountered.
+ */
+function httpGet(url: string, options: SimpledownloadOptions): Promise<{
+  request: http.ClientRequest,
+  response: http.IncomingMessage
+}> {
   const urlObj = new URL(url);
-
   const httpAgent = options.agent;
   const httpLib = urlObj.protocol === 'https:' ? https : http;
 
-  const file = fs.createWriteStream(localPath)
-  const request = httpLib.get(url, {agent: httpAgent}, (response) => {
-    response.pipe(file)
+  return new Promise((resolve, reject) => {
+    const request = httpLib.get(url, { agent: httpAgent }, async (response) => {
+      // follow redirect
+      if (response.statusCode === 301 || response.statusCode === 302) {
+        const redirectUrl = response.headers.location!
+        request.destroy()
+        // recursively follow redirect
+        const { request: request2, response: response2 } = await httpGet(redirectUrl, options)
+        resolve({ request: request2, response: response2 })
+      } else {
+        resolve({ request, response })
+      }
+    })
   })
+}
 
-  return new Promise<void>((resolve, reject) => {
+async function simpledownload(url: string, localPath: string, options: SimpledownloadOptions = {}): Promise<void> {
+  const { request, response } = await httpGet(url, options)
+  let file: fs.WriteStream
+  return new Promise<void>(async (resolve, reject) => {
+    file = fs.createWriteStream(localPath)
     file.on('finish', () => {
       resolve()
     })
@@ -30,6 +50,8 @@ async function simpledownload(url: string, localPath: string, options: Simpledow
       reject(err)
     })
 
+    response.pipe(file)
+
     // handle timeout
     if (options?.timeout) {
       const timeout = options.timeout
@@ -38,13 +60,13 @@ async function simpledownload(url: string, localPath: string, options: Simpledow
       }, timeout);
     }
   })
-  .catch((err) => {
-    // if error, release all resources
-    request?.destroy()
-    file.close()
-    delWhenExist(localPath)
-    throw err;
-  })
+    .catch((err) => {
+      // if error, release all resources
+      request?.destroy()
+      file.close()
+      delWhenExist(localPath)
+      throw err;
+    })
 }
 
 // if path exists, delete it
