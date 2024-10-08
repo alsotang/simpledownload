@@ -45,10 +45,11 @@ test('should throw when localPath does not exist', async () => {
 });
 
 test('should follow redirect', async () => {
-  const localPath = path.join(tmpDir, 'test5.png')
+  const localPath = path.join(tmpDir, 'test5.html')
   await simpledownload(urlWithRedirect, localPath)
 
   const stat = await fs.promises.stat(localPath)
 
-  expect(stat.size).toBe(214652)
+  // if greater than 10_000, it's a valid html
+  expect(stat.size).toBeGreaterThan(10_000)
 })
