@@ -33,7 +33,7 @@ test('should download a svg with custom agent', async () => {
 
 test('should handle timeout', async () => {
   const localPath = path.join(tmpDir, 'test3.png')
-  const timeout = 1000;
+  const timeout = 50;
   await expect(simpledownload(nodejsInstall, localPath, {timeout})).rejects.toThrow(TimeoutError);
   await expect(fs.promises.stat(localPath)).rejects.toThrow('ENOENT');
 });
