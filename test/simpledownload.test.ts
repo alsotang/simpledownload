@@ -5,6 +5,10 @@ import os from 'os'
 import path from 'path'
 
 const imageUrl = 'https://www.google.co.jp/images/srpr/logo11w.png'
+const nodejsInstall = 'https://nodejs.org/dist/v20.18.0/node-v20.18.0.pkg'
+// will be redirected to https://nodejs.org/en/
+const urlWithRedirect = 'http://nodejs.org/en'
+
 const tmpDir = os.tmpdir()
 
 test('should download a svg', async () => {
@@ -29,8 +33,8 @@ test('should download a svg with custom agent', async () => {
 
 test('should handle timeout', async () => {
   const localPath = path.join(tmpDir, 'test3.png')
-  const timeout = 10; // 10ms
-  await expect(simpledownload(imageUrl, localPath, {timeout})).rejects.toThrow(TimeoutError);
+  const timeout = 1000;
+  await expect(simpledownload(nodejsInstall, localPath, {timeout})).rejects.toThrow(TimeoutError);
   await expect(fs.promises.stat(localPath)).rejects.toThrow('ENOENT');
 });
 
@@ -40,11 +44,11 @@ test('should throw when localPath does not exist', async () => {
   await expect(simpledownload(imageUrl, localPath)).rejects.toThrow('ENOENT');
 });
 
-test.skip('should follow redirect', async () => {
+test('should follow redirect', async () => {
   const localPath = path.join(tmpDir, 'test5.png')
-  await simpledownload('https://url_with_redirect', localPath)
+  await simpledownload(urlWithRedirect, localPath)
 
   const stat = await fs.promises.stat(localPath)
 
-  expect(stat.size).toBe(522831)
+  expect(stat.size).toBe(214652)
 })

@@ -18,6 +18,13 @@ await simpledownload('https://www.google.co.jp/images/srpr/logo11w.png', `${__di
 * `options.timeout` - use millisecond. If timeout, `err.timeout` would exist.
 * `options.agent` - `http.Agent`. For example, you can use `node-socks-proxy-agent` to enable socks5 proxy.
 
+
+## dev
+
+1. `$ npm run test`
+2. bump package.json version
+3. `$ npm publish`
+
 ## license
 
 MIT
