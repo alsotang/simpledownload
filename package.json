@@ -1,11 +1,14 @@
 {
   "name": "simpledownload",
-  "version": "2.0.6",
+  "version": "2.1.0",
   "description": "call with `url` and `filename`, then download the file",
   "main": "dist/index.js",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
-    "build": "npm i && tsc",
-    "test": "npm run build && jest",
+    "build": "tsc",
+    "test": "npm run build && tsc -p test/tsconfig.json && node --test .test-dist/test/*.js",
     "prepublishOnly": "npm run build"
   },
   "repository": {
@@ -22,13 +25,7 @@
   },
   "homepage": "https://github.com/alsotang/simpledownload",
   "devDependencies": {
-    "@babel/core": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
-    "@babel/preset-typescript": "^7.16.5",
-    "@types/jest": "^27.0.3",
-    "@types/node": "^17.0.4",
-    "babel-jest": "^27.4.5",
-    "jest": "^27.4.5",
-    "typescript": "^4.5.4"
+    "@types/node": "^25.9.1",
+    "typescript": "^6.0.3"
   }
 }
